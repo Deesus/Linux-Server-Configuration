@@ -664,24 +664,45 @@ where <directory_name> is the name of the directory.
 ## 4. References:
 
 1: https://www.udacity.com/account#!/development_environment
+
 2: http://askubuntu.com/questions/59458/error-message-when-i-run-sudo-unable-to-resolve-host-none
+
 3: http://askubuntu.com/questions/7477/how-can-i-add-a-new-user-as-sudoer-using-the-command-line
+
 4: http://askubuntu.com/questions/196768/how-to-install-updates-via-command-line
+
 5: http://ubuntuforums.org/showthread.php?t=1110499
+
 6: https://wiki.ubuntu.com/UncomplicatedFirewall
+
 7: http://guides.webbynode.com/articles/security/ubuntu-ufw.html
+
 8: https://help.ubuntu.com/community/SSH/OpenSSH/InstallingConfiguringTesting
+
 9: https://help.ubuntu.com/community/UbuntuTime#Using_the_Command_Line_.28terminal.29
+
 10: http://blog.udacity.com/2015/03/step-by-step-guide-install-lamp-linux-apache-mysql-python-ubuntu.html
+
 11: http://askubuntu.com/questions/256013/could-not-reliably-determine-the-servers-fully-qualified-domain-name/396048#396048
+
 12: https://help.github.com/articles/set-up-git/#platform-linux
+
 13: http://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible
+
 14: https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
+
 15: http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip
+
 16: https://github.com/stueken/FSND-P5_Linux-Server-Configuration
+
 17: https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
+
 18: http://killtheyak.com/use-postgresql-with-django-flask/
+
 19: http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1
+
 20: http://unix.stackexchange.com/questions/1314/how-to-set-default-file-permissions-for-all-folders-files-in-a-directory
+
 21: http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied
+
 22: http://askubuntu.com/questions/563931/cant-isntall-pysensors-sudo-pip-install-pysensors-generates-valueerror-us
