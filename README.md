@@ -21,7 +21,7 @@ The deployed web app -- a image sharing app -- can be accessed from the followin
 
 ## 2. Walkthrough
 
-#### Getting started with your development environment [^1]:
+#### Getting started with your development environment <sup>1</sup>:
 -Download [Git Bash](http://www.git-scm.com/downloads) (necessary for Windows users)
 
 -Create a development environment and write down the unique public ip address that was generated for future reference:
@@ -50,7 +50,7 @@ where <PUBLIC_IP> is the ip address that was generated when you created a new de
 -Log in (ssh) to your virtual server if you haven't already.
 
 -When you ssh into the cloud, your hostname is displayed (after string the "@" symbol).
-You can also find your host name by entering the following command [^2]:
+You can also find your host name by entering the following command <sup>2</sup>:
 ```
 $ nano /etc/hostname/
 ```
@@ -62,7 +62,7 @@ $ nano /etc/hosts/
 ```
 This will bring up a command-line text editor [nano]; we can edit the hosts file here. On the first line, after "localhost," enter the hostname that you wrote down. Press Ctrl+o to save. Exit nano [Ctrl+x].
 
--Enter the following [^3]:
+-Enter the following <sup>3</sup>:
 ```
 $ sudo adduser grader
 ```
@@ -76,13 +76,13 @@ $ sudo adduser grader sudo
 #### Update installed packages:
 -Log in (ssh) to your virtual server if you haven't already.
 
--Enter [^4]:
+-Enter <sup>4</sup>:
 ```
 $ sudo apt-get update
 $ sudo apt-get upgrade
 ```
 
--If some of the packages are not updated (e.g. you get a message like, "The following packages have been kept back: linux-image-virtual"), enter [^5]:
+-If some of the packages are not updated (e.g. you get a message like, "The following packages have been kept back: linux-image-virtual"), enter <sup>5</sup>:
 ```
 $ sudo apt-get dist-upgrade
 ```
@@ -95,12 +95,12 @@ $ sudo reboot
 #### Enable firewall and configure ports:
 -Log in (ssh) to your virtual server if you haven't already.
 
--Allow ssh access (so that we can continue to remotely configure our server) -- enter [^6]:
+-Allow ssh access (so that we can continue to remotely configure our server) -- enter <sup>6</sup>:
 ```
 $ sudo ufw allow ssh/tcp
 ```
 
--We will be denying all connections except the ones we need [^7]. Before we do that, make sure we allow connections to the ssh port we’re connected to as well as port 2200 (which is the ssh port we will be using later on):
+-We will be denying all connections except the ones we need <sup>7</sup>. Before we do that, make sure we allow connections to the ssh port we’re connected to as well as port 2200 (which is the ssh port we will be using later on):
 ```
 $ sudo ufw allow 22
 $ sudo ufw allow 2200
@@ -118,7 +118,7 @@ You'll get a warning. Type "yes" and continue.
 $ sudo reboot
 ```
 
--The people at Ubuntu suggest we make a back-up of our sshd_config before we start making changes to it -- so let's do that. Make a read-only back-up copy located in `/etc/ssh` by entering [^8]:
+-The people at Ubuntu suggest we make a back-up of our sshd_config before we start making changes to it -- so let's do that. Make a read-only back-up copy located in `/etc/ssh` by entering <sup>8</sup>:
 ```
 $ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
 $ sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
@@ -166,7 +166,7 @@ $ sudo ufw allow 80
 $ sudo ufw allow 123
 ```
 
-#### Configure time zone to UTC [^9]:
+#### Configure time zone to UTC <sup>9</sup>:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Enter the following:
@@ -179,7 +179,7 @@ $ sudo dpkg-reconfigure tzdata
 #### Install and configure Apache to serve a Python mod_wsgi application:
 -Log in (ssh) to your virtual server if you haven't already.
 
--Install Apache; enter [^10]:
+-Install Apache; enter <sup>10</sup>:
 ```
 $ sudo apt-get install apache2
 ```
@@ -200,7 +200,7 @@ $ sudo service apache2 restart
 ```
 
 -You will likely get this warning: "apache2: Could not determine the server's fully qualified domain name, 
-using 127.0.0.1 for ServerName". It's not critical. But we can easily change it. Let's create a new Apache config file called "servername" [^11]:
+using 127.0.0.1 for ServerName". It's not critical. But we can easily change it. Let's create a new Apache config file called "servername" <sup>11</sup:
 ```
 $ sudo nano /etc/apache2/conf-available/servername.conf
 ```
@@ -217,7 +217,7 @@ $ sudo a2enconf servername
 $ sudo service apache2 restart
 ```
 
-#### Install Git and clone GitHub repository [^12]:
+#### Install Git and clone GitHub repository <sup>12</sup>:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Install Git:
@@ -269,7 +269,7 @@ $ mv /var/www/<My-Repo-Name> /var/www/<my_app>
 ```
 where <My-Repo-Name> is the name of the repo directory (i.e. the outter directory) and <my_app> is the name of the app (i.e. the inner directory).
 
--Let's make GitHub repo inaccessible [^13].
+-Let's make GitHub repo inaccessible <sup>13</sup>.
 -Cd to `/var/www/<app_folder>/` where <app_folder> is the name of your app.
 
 -Create a ".htaccess" file:
@@ -283,7 +283,7 @@ RedirectMatch 404 /\.git
 ```
 Save and exit nano.
 
-#### Setup Flask [^14]:
+#### Setup Flask <sup>14</sup>:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Install additional packages -- enter:
@@ -315,7 +315,7 @@ $ sudo virtualenv <VENV>
 ```
 where <VENV> is the name of your virtual environment.
 
--Enable permissions in the new virtual environment [^15]:
+-Enable permissions in the new virtual environment <sup>15</sup>:
 ```
 $ sudo chmod -R 777 <VENV>
 ```
@@ -402,7 +402,7 @@ where <app_name> is the name of your app. Save and exit nano.
 $ sudo service apache2 restart
 ```
 
-#### Install dependencies [^16]:
+#### Install dependencies <sup>16</sup>:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Activate your virtual envoirnment:
@@ -421,7 +421,7 @@ $ sudo pip install sqlalchemy
 $ sudo apt-get install python-psycopg2
 ```
 
-#### Install Postgresql [^17]:
+#### Install Postgresql <sup>17</sup>:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Install Postgres:
@@ -488,7 +488,7 @@ GRANT ALL ON SCHEMA public TO catalog;
 exit
 ```
 
--Use nano and open every file in your app that has the snippet `create_engine` -- the expression that binds the ORM. For example, both my `__init__.py` and `database_setup.py` files contain the line, `create_engine('postgresql+psycopg2://vagrant:pass@localhost/imagesharing')`. Change any lines that use `create_engine` to [^18]:
+-Use nano and open every file in your app that has the snippet `create_engine` -- the expression that binds the ORM. For example, both my `__init__.py` and `database_setup.py` files contain the line, `create_engine('postgresql+psycopg2://vagrant:pass@localhost/imagesharing')`. Change any lines that use `create_engine` to <sup>18</sup>:
 `postgresql://<USER_NAME>:<DB_PASSWORD>@localhost/<DB_NAME>`
 where <USER_NAME> is the name of the database user (we had earlier specified this user as "catalog"), <DB_PASSWORD> is his password, and <DB_NAME> is the name of the database you specified. Save and exit nano.
 
@@ -502,7 +502,7 @@ $ cd /var/www
 $ python database_setup.py
 ```
 
-#### Enable Google OAuth2 [^16]:
+#### Enable Google OAuth2 <sup>16</sup>:
 -Open your browser and enter [http://www.hcidata.info/host2ip.cgi](http://www.hcidata.info/host2ip.cgi). Enter your public ip address to receive your host name -- copy/write down this name.
 
 -From your browser, go to [Google's Developer Console](https://console.developers.google.com/project).
@@ -581,15 +581,15 @@ $ sudo tail -30 /var/log/apache2/error.log
 
 -If your traceback contains a 'permission denied' when trying to write/delete, you will need to make changes to permissions/ownership. Here are some resources that solve this issue -- with the first method being the most successful method:
 
-1) [Make all new files in a directory accessible to a group](http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1)[http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1] [^19]
+1) [Make all new files in a directory accessible to a group](http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1)[http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1] <sup>19</sup>
 
-2) [How to set default file permissions for all folders/files in a directory?](http://unix.stackexchange.com/questions/1314/how-to-set-default-file-permissions-for-all-folders-files-in-a-directory) [^20]
+2) [How to set default file permissions for all folders/files in a directory?](http://unix.stackexchange.com/questions/1314/how-to-set-default-file-permissions-for-all-folders-files-in-a-directory) <sup>20</sup>
 
-3) [http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied](http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied) [^21]
+3) [http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied](http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied) <sup>21</sup>
 
 #### Install Extras:
 
--Let's install the monitor application, Glances [^16] [^22]. Log in (ssh) to your virtual server if you haven't already.
+-Let's install the monitor application, Glances <sup>16</sup> <sup>22</sup>. Log in (ssh) to your virtual server if you haven't already.
 
 -Enter:
 ```
@@ -599,7 +599,7 @@ $ sudo apt-get install lm-sensors
 $ sudo pip install PySensors
 ```
 
--Let's configure our firewall to prevent brute force attacks (repeated login attempts) [^16].
+-Let's configure our firewall to prevent brute force attacks (repeated login attempts) <sup>16</sup>.
 
 -Install "Fail2ban":
 ```
@@ -663,25 +663,25 @@ where <directory_name> is the name of the directory.
 
 ## 4. References:
 
-[^1]: https://www.udacity.com/account#!/development_environment
-[^2]: http://askubuntu.com/questions/59458/error-message-when-i-run-sudo-unable-to-resolve-host-none
-[^3]: http://askubuntu.com/questions/7477/how-can-i-add-a-new-user-as-sudoer-using-the-command-line
-[^4]: http://askubuntu.com/questions/196768/how-to-install-updates-via-command-line
-[^5]: http://ubuntuforums.org/showthread.php?t=1110499
-[^6]: https://wiki.ubuntu.com/UncomplicatedFirewall
-[^7]: http://guides.webbynode.com/articles/security/ubuntu-ufw.html
-[^8]: https://help.ubuntu.com/community/SSH/OpenSSH/InstallingConfiguringTesting
-[^9]: https://help.ubuntu.com/community/UbuntuTime#Using_the_Command_Line_.28terminal.29
-[^10]: http://blog.udacity.com/2015/03/step-by-step-guide-install-lamp-linux-apache-mysql-python-ubuntu.html
-[^11]: http://askubuntu.com/questions/256013/could-not-reliably-determine-the-servers-fully-qualified-domain-name/396048#396048
-[^12]: https://help.github.com/articles/set-up-git/#platform-linux
-[^13]: http://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible
-[^14]: https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
-[^15]: http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip
-[^16]: https://github.com/stueken/FSND-P5_Linux-Server-Configuration
-[^17]: https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
-[^18]: http://killtheyak.com/use-postgresql-with-django-flask/
-[^19]: http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1
-[^20]: http://unix.stackexchange.com/questions/1314/how-to-set-default-file-permissions-for-all-folders-files-in-a-directory
-[^21]: http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied
-[^22]: http://askubuntu.com/questions/563931/cant-isntall-pysensors-sudo-pip-install-pysensors-generates-valueerror-us
+1: https://www.udacity.com/account#!/development_environment
+2: http://askubuntu.com/questions/59458/error-message-when-i-run-sudo-unable-to-resolve-host-none
+3: http://askubuntu.com/questions/7477/how-can-i-add-a-new-user-as-sudoer-using-the-command-line
+4: http://askubuntu.com/questions/196768/how-to-install-updates-via-command-line
+5: http://ubuntuforums.org/showthread.php?t=1110499
+6: https://wiki.ubuntu.com/UncomplicatedFirewall
+7: http://guides.webbynode.com/articles/security/ubuntu-ufw.html
+8: https://help.ubuntu.com/community/SSH/OpenSSH/InstallingConfiguringTesting
+9: https://help.ubuntu.com/community/UbuntuTime#Using_the_Command_Line_.28terminal.29
+10: http://blog.udacity.com/2015/03/step-by-step-guide-install-lamp-linux-apache-mysql-python-ubuntu.html
+11: http://askubuntu.com/questions/256013/could-not-reliably-determine-the-servers-fully-qualified-domain-name/396048#396048
+12: https://help.github.com/articles/set-up-git/#platform-linux
+13: http://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible
+14: https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
+15: http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip
+16: https://github.com/stueken/FSND-P5_Linux-Server-Configuration
+17: https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
+18: http://killtheyak.com/use-postgresql-with-django-flask/
+19: http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1
+20: http://unix.stackexchange.com/questions/1314/how-to-set-default-file-permissions-for-all-folders-files-in-a-directory
+21: http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied
+22: http://askubuntu.com/questions/563931/cant-isntall-pysensors-sudo-pip-install-pysensors-generates-valueerror-us
