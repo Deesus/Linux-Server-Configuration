@@ -11,7 +11,9 @@ This README proffers a step-by-step walkthrough of Udacity's Linux Configuration
 *SSH Port:* 2200
 
 You can log into the virtual server (on Amazon's cloud) using this shell command:
-```$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa root@54.186.19.143```
+```
+$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa root@54.186.19.143
+```
 
 The deployed web app -- a image sharing app -- can be accessed from the following url:
 [http://54.186.19.143](http://54.186.19.143)
@@ -28,14 +30,20 @@ The deployed web app -- a image sharing app -- can be accessed from the followin
 -Download the private key(s)
 
 -Open Git Bash and copy and paste the following into the terminal:
-```$ mv <CURRENT_DIRECTORY>/udacity_key.rsa ~/.ssh/```
+```
+$ mv <CURRENT_DIRECTORY>/udacity_key.rsa ~/.ssh/
+```
 where <CURRENT_DIRECTORY> is the directory where you downloaded the private key. 
 
 -Enter:
-```$ chmod 600 ~/.ssh/udacity_key.rsa```
+```
+$ chmod 600 ~/.ssh/udacity_key.rsa
+```
 
 -Finally, we can lon into our virtual sever by:
-```$ ssh -i ~/.ssh/udacity_key.rsa root@<PUBLIC_IP>```
+```
+$ ssh -i ~/.ssh/udacity_key.rsa root@<PUBLIC_IP>
+```
 where <PUBLIC_IP> is the ip address that was generated when you created a new development environment.
 
 #### Creating a new user
@@ -43,19 +51,27 @@ where <PUBLIC_IP> is the ip address that was generated when you created a new de
 
 -When you ssh into the cloud, your hostname is displayed (after string the "@" symbol).
 You can also find your host name by entering the following command [^2]:
-```$ nano /etc/hostname/```
+```
+$ nano /etc/hostname/
+```
 Write this down. Exit this screen [Ctrl+x].
 
 -Enter the following command:
-```$ nano /etc/hosts/```
+```
+$ nano /etc/hosts/
+```
 This will bring up a command-line text editor [nano]; we can edit the hosts file here. On the first line, after "localhost," enter the hostname that you wrote down. Press Ctrl+o to save. Exit nano [Ctrl+x].
 
 -Enter the following[^3]:
-```$ sudo adduser grader```
+```
+$ sudo adduser grader
+```
 Ubuntu will create a new user and ask you for more info about the user. Enter relevant properties about the user or skip them by pressing ENTER.
 
 -Enter:
-```$ sudo adduser grader sudo```
+```
+$ sudo adduser grader sudo
+```
 
 #### Update installed packages:
 -Log in (ssh) to your virtual server if you haven't already.
@@ -67,16 +83,22 @@ $ sudo apt-get upgrade
 ```
 
 -If some of the packages are not updated (e.g. you get a message like, "The following packages have been kept back: linux-image-virtual"), enter[^5]:
-```$ sudo apt-get dist-upgrade```
+```
+$ sudo apt-get dist-upgrade
+```
 
 -Restart Ubutnu:
-```$ sudo reboot```
+```
+$ sudo reboot
+```
 
 #### Enable firewall and configure ports:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Allow ssh access (so that we can continue to remotely configure our server) -- enter[^6]:
-```$ sudo ufw allow ssh/tcp```
+```
+$ sudo ufw allow ssh/tcp
+```
 
 -We will be denying all connections except the ones we need[^7]. Before we do that, make sure we allow connections to the ssh port we’re connected to as well as port 2200 (which is the ssh port we will be using later on):
 ```
@@ -86,40 +108,56 @@ $ sudo ufw allow 2200
 You should have gotten the response of "Rules updated" for each command.
 
 -Let's now enable the firewall:
-```$ sudo ufw enable```
+```
+$ sudo ufw enable
+```
 You'll get a warning. Type "yes" and continue.
 
 -Restart Ubuntu:
-```$ sudo reboot```
+```
+$ sudo reboot
+```
 
--The people at Ubuntu suggest we make a back-up of our sshd_config before we start making changes to it -- so let's do that. Make a read-only back-up copy located in ```/etc/ssh``` by entering [^8]:
+-The people at Ubuntu suggest we make a back-up of our sshd_config before we start making changes to it -- so let's do that. Make a read-only back-up copy located in `/etc/ssh` by entering [^8]:
 ```
 $ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
 $ sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
 ```
 
 -Let's make changes to the config via nano:
-```$ sudo nano /etc/ssh/sshd_config```
+```
+$ sudo nano /etc/ssh/sshd_config
+```
 Change the line that says "Port 22" to "Port 2200". Save and exit nano.
 
 -Restart sshd before changes take place:
-```$ sudo service ssh restart```
+```
+$ sudo service ssh restart
+```
 
 *NOTE:* From now on, we cannot ssh into our virtual server using our previous command. From now on, we must specify the port [2200] we want to connect to:
-```$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa root@<PUBLIC_IP>```
+```
+$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa root@<PUBLIC_IP>
+```
 where <PUBLIC_IP> is the public ip address we have been using.
 
 -Let's finish configuring the firewall. Log in (ssh) if you haven't already. 
 
 -We only want the firewall to accept incoming connection to ports 2200, 80, and 123. We can check the allowed connections to our firewall (called "rules") by entering:
-```$ sudo ufw status```
+```
+$ sudo ufw status
+```
 
 -To delete some previous rules, we would enter: 
-```$ sudo ufw delete <existing_rule>```
-where ```<existing_rule>``` is the rule to be deleted. I.e. we prefix our previous rule with the word "delete". 
+```
+$ sudo ufw delete <existing_rule>
+```
+where `<existing_rule>` is the rule to be deleted. I.e. we prefix our previous rule with the word "delete". 
 
 -Go ahead and delete port 22: 
-```$ sudo delete ufw allow 22```
+```
+$ sudo delete ufw allow 22
+```
 Check the firewall status to see confirm deletions. Go ahead and delete all other ports that are not 2200.
 
 -Finally, add port 80 (HTML) and port 123 (NTP):
@@ -132,7 +170,9 @@ $ sudo ufw allow 123
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Enter the following:
-```$ sudo dpkg-reconfigure tzdata```
+```
+$ sudo dpkg-reconfigure tzdata
+```
 
 -You will be presented with a pink screen. Select "None of the above" then select "UTC" in the following screen. Finally, you are prompted with the current local time and the current universal time -- they should be the same.
 
@@ -140,23 +180,35 @@ $ sudo ufw allow 123
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Install Apache; enter[^10]:
-```$ sudo apt-get install apache2```
+```
+$ sudo apt-get install apache2
+```
 
 -We need to install several dependencies. First, install "mod_wsgi":
-```$ sudo apt-get install libapache2-mod-wsgi```
+```
+$ sudo apt-get install libapache2-mod-wsgi
+```
 
 -This will install a helper-function called "python-setuptools":
-```$ sudo apt-get install python-setuptools```
+```
+$ sudo apt-get install python-setuptools
+```
 
 -Restart the Apache server for the changes to take effect:
-```$ sudo service apache2 restart```
+```
+$ sudo service apache2 restart
+```
 
 -You will likely get this warning: "apache2: Could not determine the server's fully qualified domain name, 
 using 127.0.0.1 for ServerName". It's not critical. But we can easily change it. Let's create a new Apache config file called "servername"[^11]:
-```$ sudo nano /etc/apache2/conf-available/servername.conf```
+```
+$ sudo nano /etc/apache2/conf-available/servername.conf
+```
 
 -Enter the following -- which will change the server's name to "localhost":
-```$ ServerName localhost```
+```
+$ ServerName localhost
+```
 Save and exit nano.
 
 Now enable our config file and restart Apache for it to take effect:
@@ -169,21 +221,31 @@ $ sudo service apache2 restart
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Install Git:
-```$ sudo apt-get install git```
+```
+$ sudo apt-get install git
+```
 
 -Set your name for commits:
-```$ git config --global user.name "<YOUR_NAME>"```
-where <YOUR_NAME> is your name.
+```
+$ git config --global user.name "<YOUR_NAME>"
+```
+where <YOUR_NAME> is your name. (N.b. the presence of quotation marks.)
 
 -Set your email address associated with your GitHub account (for commits):
-```$ git config --global user.email "<EMAIL_ADDRESS>"```
+```
+$ git config --global user.email "<EMAIL_ADDRESS>"
+```
 where <EMAIL_ADDRESS> is the email account associated with your GitHub account.
 
 -Enter:
-```$ cd /var/www```
+```
+$ cd /var/www
+```
 
 -Clone your GitHub repo app:
-```$ git clone <CLONE_URL>```
+```
+$ git clone <CLONE_URL>
+```
 where <CLONE_URL> is clone url of your GitHub repo.
 
 -You may need to rename the cloned directory. I will assume your app follows the typical Python "package" structure -- for example, after cloning your repo, your app may be structured like so:
@@ -202,56 +264,82 @@ var/
                 └── static/
 ```
 In this case, we would need to rename "My-Repo-Name" to "my_app":
-```$ mv /var/www/<My-Repo-Name> /var/www/<my_app>```
+```
+$ mv /var/www/<My-Repo-Name> /var/www/<my_app>
+```
 where <My-Repo-Name> is the name of the repo directory (i.e. the outter directory) and <my_app> is the name of the app (i.e. the inner directory).
 
 -Let's make GitHub repo inaccessible[^13].
--Cd to ```/var/www/<app_folder>/``` where <app_folder> is the name of your app.
+-Cd to `/var/www/<app_folder>/` where <app_folder> is the name of your app.
 
 -Create a ".htaccess" file:
-```$ sudo nano .htaccess```
+```
+$ sudo nano .htaccess
+```
 
 -Paste the following:
-```RedirectMatch 404 /\.git```
+```
+RedirectMatch 404 /\.git
+```
 Save and exit nano.
 
 #### Setup Flask[^14]:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Install additional packages -- enter:
-```$ sudo apt-get install libapache2-mod-wsgi python-dev```
+```
+$ sudo apt-get install libapache2-mod-wsgi python-dev
+```
 
 -Enable the downloaded package:
-```sudo a2enmod wsgi```
+```
+sudo a2enmod wsgi
+```
 (It should already be enabled.)
 
 -We will create a virtual environment for our app.
 
 -Install pip:
-```$ sudo apt-get install python-pip```
+```
+$ sudo apt-get install python-pip
+```
 
 -Install "virtualenv":
-```$ sudo pip install virtualenv```
+```
+$ sudo pip install virtualenv
+```
 
 -Name your new virtual environment -- enter:
-```$ sudo virtualenv <VENV>```
+```
+$ sudo virtualenv <VENV>
+```
 where <VENV> is the name of your virtual environment.
 
 -Enable permissions in the new virtual environment[^15]:
-```$ sudo chmod -R 777 <VENV>```
+```
+$ sudo chmod -R 777 <VENV>
+```
 where <VENV> is the name of your virtual environment.
 
 -Activate it:
-```$ source <VENV>/bin/activate```
+```
+$ source <VENV>/bin/activate
+```
 
 -Install Flask inside:
-```$ sudo pip install Flask```
+```
+$ sudo pip install Flask
+```
 
 -Deactivate the virtual environment:
-```$ deactivate```
+```
+$ deactivate
+```
 
 -Enter:
-```$ sudo nano /etc/apache2/sites-available/<app_name>.conf```
+```
+$ sudo nano /etc/apache2/sites-available/<app_name>.conf
+```
 where <app_name> is the name of your app (the directory name in /var/www/).
 Note: I once again assume your app is structured as a package.
 
@@ -278,17 +366,23 @@ Note: I once again assume your app is structured as a package.
 where <PUBLIC_IP> is the public ip you generated when you created the development environment, and where <app_name> is the name of the app (same as the name of the app directory). Note: we are specifying a .wsgi file called <app_name>.wsgi -- this can be called anything, but for simplicity, we will be consistent  and use the name of the app. Save and close nano.
 
 Enable the virtual host:
-```$ sudo a2ensite <app_name>```
+```
+$ sudo a2ensite <app_name>
+```
 where <app_name> is the name of the app.
 
 -Create the .wsgi file:
 
 -Enter:
-```$ sudo /var/www/<app_name>```
+```
+$ sudo /var/www/<app_name>
+```
 where <app_name> is the name of your app.
 
 -Enter:
-```$ sudo nano <app_name>.wsgi```
+```
+$ sudo nano <app_name>.wsgi
+```
 
 -Paste the following:
 ```
@@ -304,13 +398,17 @@ application.secret_key = 'simple_key'
 where <app_name> is the name of your app. Save and exit nano.
 
 -Restart Apache:
-```$ sudo service apache2 restart```
+```
+$ sudo service apache2 restart
+```
 
 #### Install dependencies[^16]:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Activate your virtual envoirnment:
-```$ source <VENV>/bin/activate```
+```
+$ source <VENV>/bin/activate
+```
 where <VENV> is the name of the virtual environment you created.
 
 -Enter:
@@ -348,41 +446,61 @@ $ psql
 ```
 
 -Add user and password to postgres:
-```CREATE USER catalog WITH PASSWORD '<USER_PASSWORD>';```
+```
+CREATE USER catalog WITH PASSWORD '<USER_PASSWORD>';
+```
 where <USER_PASSWORD> is the password (you choose) for user "catalog".
 
 -Give this user privileges to create relations:
-```ALTER USER catalog CREATEDB;```
+```
+ALTER USER catalog CREATEDB;
+```
 
 -Create a new database:
-```CREATE DATABASE <DB_NAME> WITH OWNER catalog;```
+```
+CREATE DATABASE <DB_NAME> WITH OWNER catalog;
+```
 where <DB_NAME> is the name of the database.
 
 -Connect to database:
-```\c <DB_NAME>```
+```
+\c <DB_NAME>
+```
 where <DB_NAME> is the name of the database.
 
 -Enter:
-```REVOKE ALL ON SCHEMA public FROM public;```
+```
+REVOKE ALL ON SCHEMA public FROM public;
+```
 
 -Enter:
-```GRANT ALL ON SCHEMA public TO catalog;```
+```
+GRANT ALL ON SCHEMA public TO catalog;
+```
 
 -Disconnect from database:
-```\q```
+```
+\q
+```
 
 -Quit psql:
-```exit```
+```
+exit
+```
 
--Use nano and open every file in your app that has the snippet ```create_engine``` -- the expression that binds the ORM. For example, both my ```__init__.py``` and ```database_setup.py``` files contain the line, ```create_engine('postgresql+psycopg2://vagrant:pass@localhost/imagesharing')```. Change any lines that use ```create_engine``` to [^18]:
-```postgresql://<USER_NAME>:<DB_PASSWORD>@localhost/<DB_NAME>```
+-Use nano and open every file in your app that has the snippet `create_engine` -- the expression that binds the ORM. For example, both my `__init__.py` and `database_setup.py` files contain the line, `create_engine('postgresql+psycopg2://vagrant:pass@localhost/imagesharing')`. Change any lines that use `create_engine` to [^18]:
+`postgresql://<USER_NAME>:<DB_PASSWORD>@localhost/<DB_NAME>`
 where <USER_NAME> is the name of the database user (we had earlier specified this user as "catalog"), <DB_PASSWORD> is his password, and <DB_NAME> is the name of the database you specified. Save and exit nano.
 
--Move to your app folder (or whatever folder contains the ```database_setup.py``` file):
-```$ cd /var/www```
+-Move to your app folder (or whatever folder contains the `database_setup.py` file):
+```
+$ cd /var/www
+```
 
 -Create database:
-```$ python database_setup.py```
+```
+$ python database_setup.py
+```
 
 #### Enable Google OAuth2[^16]:
 -Open your browser and enter [http://www.hcidata.info/host2ip.cgi](http://www.hcidata.info/host2ip.cgi). Enter your public ip address to receive your host name -- copy/write down this name.
@@ -405,43 +523,61 @@ where <PUBLIC_IP> is the public ip address of your app and <HOST_NAME> is the ho
 -Open Git Bash and log in (ssh) to your virtual server.
 
 -Open your app's Apache config file:
-```$ sudo nano /etc/apache2/sites-available/<app_name>.conf```
+```
+$ sudo nano /etc/apache2/sites-available/<app_name>.conf
+```
 where <app_name> is the name of your app.
 
 -Paste in the following in nano, below the line that statement that contains ServerAdmin:
-```ServerAlias <HOST_NAME>```
+```
+ServerAlias <HOST_NAME>
+```
 where  <HOST_NAME> is the host name you received from [http://www.hcidata.info/host2ip.cgi](http://www.hcidata.info/host2ip.cgi). Save and exit nano.
 
 -Enable the virtual host:
-```$ sudo a2ensite <VIRTUAL_HOST_NAME>```
+```
+$ sudo a2ensite <VIRTUAL_HOST_NAME>
+```
 where <VIRTUAL_HOST_NAME> is the name of the virtual host config file you created earlier.
 
 #### Important changes to app:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Navigate to your app's location:
-```cd /var/www/<app_name>/<app_name>```
+```
+cd /var/www/<app_name>/<app_name>
+```
 where <app_name> is the name of your app.
 
--Search your app for every instance of ```client_secrets.json```. Replace this string with the full path of the the location of your "client_secrets.json" file. For example, if you encounter a line such as:
-```CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']```
+-Search your app for every instance of `client_secrets.json`. Replace this string with the full path of the the location of your "client_secrets.json" file. For example, if you encounter a line such as:
+```
+CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
+```
 or a line like:
-```oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')```
+```
+oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+```
 you would change the lines to:
-```CLIENT_ID = json.loads(open(r'/var/www/<app_dir>/<app_dir>/client_secrets.json', 'r').read())['web']['client_id']```
+```
+CLIENT_ID = json.loads(open(r'/var/www/<app_dir>/<app_dir>/client_secrets.json', 'r').read())['web']['client_id']
+```
 and
-```oauth_flow = flow_from_clientsecrets(r'/var/www/<app_dir>/<app_dir>/client_secrets.json', scope='')```
+```
+oauth_flow = flow_from_clientsecrets(r'/var/www/<app_dir>/<app_dir>/client_secrets.json', scope='')
+```
 respectively.
-Where <app_name> is the name of the app directory, assuming your "client_secrets.json" is located in ```/var/www/<app_name>/<app_name>```.
+Where <app_name> is the name of the app directory, assuming your "client_secrets.json" is located in `/var/www/<app_name>/<app_name>`.
 
 *NOTE: If your app makes modifications to the file structure -- i.e. it adds/deletes files and folders (e.g. an image sharing app such as the one I have provided) -- then several more changes need to be made:
 
--Cd to ```/var/www/<app_name>/<app_name>``` and search all of your app files for any instances where relative paths are used for creating/deleting files and folders (e.g. an UPLOAD_FOLDER or a MEDIA_Folder).
+-Cd to `/var/www/<app_name>/<app_name>` and search all of your app files for any instances where relative paths are used for creating/deleting files and folders (e.g. an UPLOAD_FOLDER or a MEDIA_Folder).
 
--Restart Apache: ```$ sudo service apache2 restart```
+-Restart Apache: `$ sudo service apache2 restart`
 
 -Visit your deployed app on a browser -- which is just your public ip. If you are unable to save delete files, open the terminal (and ssh in) and check the traceback:
-```$ sudo tail -30 /var/log/apache2/error.log```
+```
+$ sudo tail -30 /var/log/apache2/error.log
+```
 
 -If your traceback contains a 'permission denied' when trying to write/delete, you will need to make changes to permissions/ownership. Here are some resources that solve this issue -- with the first method being the most successful method:
 
@@ -466,13 +602,19 @@ $ sudo pip install PySensors
 -Let's configure our firewall to prevent brute force attacks (repeated login attempts)[^16].
 
 -Install "Fail2ban":
-```$ sudo apt-get install fail2ban```
+```
+$ sudo apt-get install fail2ban
+```
 
 -Enter:
-```$ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local```
+```
+$ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+```
 
 -Open the "Fail2ban" config file:
-```$ sudo nano /etc/fail2ban/jail.local```
+```
+$ sudo nano /etc/fail2ban/jail.local
+```
 
 -In the [Default] section, set the following parameters:
 ```
@@ -483,11 +625,15 @@ action = %(action_mwl)s
 where <EMAIL> is the email that you want to use to alert us of break-in attempts.
 
 -In the [ssh] section, set the following parameter:
-```port = 2200```
+```
+port = 2200
+```
 Save and exit nano.
 
 -Install dependencies (N.b. this takes a few minutes -- don't terminate in the middle of the process!):
-```$ sudo apt-get install sendmail iptables-persistent```
+```
+$ sudo apt-get install sendmail iptables-persistent
+```
 
 -Stop and restart the service:
 ```
@@ -498,18 +644,22 @@ $ sudo service fail2ban start
 ## 3. Other helpful Bash commands:
 
 -To copy folder contents recursively to another, we use:
-```$ cp -r <folder_to_be_coppied>/* <destination_folder>```
+```
+$ cp -r <folder_to_be_coppied>/* <destination_folder>
+```
 where <folder_to_be_coppied> and <destination_folder> are the names of the target and destination folders, respectively.
 
 -To recursively delete a folder and its contents we use:
-```$ rm -rf <directory_name>```
+```
+$ rm -rf <directory_name>
+```
 where <directory_name> is the name of the directory.
 
--You can access manual for every shell command by prepending ```$ man``` -- for example: ```$ man ssh``` or ```$ man nano```.
+-You can access manual for every shell command by prepending `$ man` -- for example: `$ man ssh` or `$ man nano`.
 
--Use the command ```$ sudo tail -30 /var/log/apache2/error.log``` to see the apache's error log/traceback for the last 30 lines.
+-Use the command `$ sudo tail -30 /var/log/apache2/error.log` to see the apache's error log/traceback for the last 30 lines.
  
--Restart Apache (and therefore your app): ```$ sudo service apache2 restart```.
+-Restart Apache (and therefore your app): `$ sudo service apache2 restart`.
 
 ## 4. References:
 
