@@ -21,7 +21,7 @@ The deployed web app -- a image sharing app -- can be accessed from the followin
 
 ## 2. Walkthrough
 
-#### Getting started with your development environment[^1]:
+#### Getting started with your development environment [^1]:
 -Download [Git Bash](http://www.git-scm.com/downloads) (necessary for Windows users)
 
 -Create a development environment and write down the unique public ip address that was generated for future reference:
@@ -62,7 +62,7 @@ $ nano /etc/hosts/
 ```
 This will bring up a command-line text editor [nano]; we can edit the hosts file here. On the first line, after "localhost," enter the hostname that you wrote down. Press Ctrl+o to save. Exit nano [Ctrl+x].
 
--Enter the following[^3]:
+-Enter the following [^3]:
 ```
 $ sudo adduser grader
 ```
@@ -76,13 +76,13 @@ $ sudo adduser grader sudo
 #### Update installed packages:
 -Log in (ssh) to your virtual server if you haven't already.
 
--Enter[^4]:
+-Enter [^4]:
 ```
 $ sudo apt-get update
 $ sudo apt-get upgrade
 ```
 
--If some of the packages are not updated (e.g. you get a message like, "The following packages have been kept back: linux-image-virtual"), enter[^5]:
+-If some of the packages are not updated (e.g. you get a message like, "The following packages have been kept back: linux-image-virtual"), enter [^5]:
 ```
 $ sudo apt-get dist-upgrade
 ```
@@ -95,12 +95,12 @@ $ sudo reboot
 #### Enable firewall and configure ports:
 -Log in (ssh) to your virtual server if you haven't already.
 
--Allow ssh access (so that we can continue to remotely configure our server) -- enter[^6]:
+-Allow ssh access (so that we can continue to remotely configure our server) -- enter [^6]:
 ```
 $ sudo ufw allow ssh/tcp
 ```
 
--We will be denying all connections except the ones we need[^7]. Before we do that, make sure we allow connections to the ssh port we’re connected to as well as port 2200 (which is the ssh port we will be using later on):
+-We will be denying all connections except the ones we need [^7]. Before we do that, make sure we allow connections to the ssh port we’re connected to as well as port 2200 (which is the ssh port we will be using later on):
 ```
 $ sudo ufw allow 22
 $ sudo ufw allow 2200
@@ -179,7 +179,7 @@ $ sudo dpkg-reconfigure tzdata
 #### Install and configure Apache to serve a Python mod_wsgi application:
 -Log in (ssh) to your virtual server if you haven't already.
 
--Install Apache; enter[^10]:
+-Install Apache; enter [^10]:
 ```
 $ sudo apt-get install apache2
 ```
@@ -200,7 +200,7 @@ $ sudo service apache2 restart
 ```
 
 -You will likely get this warning: "apache2: Could not determine the server's fully qualified domain name, 
-using 127.0.0.1 for ServerName". It's not critical. But we can easily change it. Let's create a new Apache config file called "servername"[^11]:
+using 127.0.0.1 for ServerName". It's not critical. But we can easily change it. Let's create a new Apache config file called "servername" [^11]:
 ```
 $ sudo nano /etc/apache2/conf-available/servername.conf
 ```
@@ -217,7 +217,7 @@ $ sudo a2enconf servername
 $ sudo service apache2 restart
 ```
 
-#### Install Git and clone GitHub repository[^12]:
+#### Install Git and clone GitHub repository [^12]:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Install Git:
@@ -269,7 +269,7 @@ $ mv /var/www/<My-Repo-Name> /var/www/<my_app>
 ```
 where <My-Repo-Name> is the name of the repo directory (i.e. the outter directory) and <my_app> is the name of the app (i.e. the inner directory).
 
--Let's make GitHub repo inaccessible[^13].
+-Let's make GitHub repo inaccessible [^13].
 -Cd to `/var/www/<app_folder>/` where <app_folder> is the name of your app.
 
 -Create a ".htaccess" file:
@@ -283,7 +283,7 @@ RedirectMatch 404 /\.git
 ```
 Save and exit nano.
 
-#### Setup Flask[^14]:
+#### Setup Flask [^14]:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Install additional packages -- enter:
@@ -315,7 +315,7 @@ $ sudo virtualenv <VENV>
 ```
 where <VENV> is the name of your virtual environment.
 
--Enable permissions in the new virtual environment[^15]:
+-Enable permissions in the new virtual environment [^15]:
 ```
 $ sudo chmod -R 777 <VENV>
 ```
@@ -402,7 +402,7 @@ where <app_name> is the name of your app. Save and exit nano.
 $ sudo service apache2 restart
 ```
 
-#### Install dependencies[^16]:
+#### Install dependencies [^16]:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Activate your virtual envoirnment:
@@ -421,7 +421,7 @@ $ sudo pip install sqlalchemy
 $ sudo apt-get install python-psycopg2
 ```
 
-#### Install Postgresql[^17]:
+#### Install Postgresql [^17]:
 -Log in (ssh) to your virtual server if you haven't already.
 
 -Install Postgres:
@@ -502,7 +502,7 @@ $ cd /var/www
 $ python database_setup.py
 ```
 
-#### Enable Google OAuth2[^16]:
+#### Enable Google OAuth2 [^16]:
 -Open your browser and enter [http://www.hcidata.info/host2ip.cgi](http://www.hcidata.info/host2ip.cgi). Enter your public ip address to receive your host name -- copy/write down this name.
 
 -From your browser, go to [Google's Developer Console](https://console.developers.google.com/project).
@@ -581,15 +581,15 @@ $ sudo tail -30 /var/log/apache2/error.log
 
 -If your traceback contains a 'permission denied' when trying to write/delete, you will need to make changes to permissions/ownership. Here are some resources that solve this issue -- with the first method being the most successful method:
 
-1) [Make all new files in a directory accessible to a group](http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1)[http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1][^19]
+1) [Make all new files in a directory accessible to a group](http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1)[http://unix.stackexchange.com/questions/12842/make-all-new-files-in-a-directory-accessible-to-a-group?lq=1] [^19]
 
-2) [How to set default file permissions for all folders/files in a directory?](http://unix.stackexchange.com/questions/1314/how-to-set-default-file-permissions-for-all-folders-files-in-a-directory)[^20]
+2) [How to set default file permissions for all folders/files in a directory?](http://unix.stackexchange.com/questions/1314/how-to-set-default-file-permissions-for-all-folders-files-in-a-directory) [^20]
 
-3) [http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied](http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied)[^21]
+3) [http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied](http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied) [^21]
 
 #### Install Extras:
 
--Let's install the monitor application, Glances[^16][^22]. Log in (ssh) to your virtual server if you haven't already.
+-Let's install the monitor application, Glances [^16] [^22]. Log in (ssh) to your virtual server if you haven't already.
 
 -Enter:
 ```
@@ -599,7 +599,7 @@ $ sudo apt-get install lm-sensors
 $ sudo pip install PySensors
 ```
 
--Let's configure our firewall to prevent brute force attacks (repeated login attempts)[^16].
+-Let's configure our firewall to prevent brute force attacks (repeated login attempts) [^16].
 
 -Install "Fail2ban":
 ```
