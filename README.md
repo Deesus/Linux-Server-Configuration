@@ -40,7 +40,7 @@ where <CURRENT_DIRECTORY> is the directory where you downloaded the private key.
 $ chmod 600 ~/.ssh/udacity_key.rsa
 ```
 
--Finally, we can lon into our virtual sever by:
+-Finally, we can log into our virtual sever by:
 ```
 $ ssh -i ~/.ssh/udacity_key.rsa root@<PUBLIC_IP>
 ```
