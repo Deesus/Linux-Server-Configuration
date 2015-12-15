@@ -87,7 +87,7 @@ $ sudo apt-get upgrade
 $ sudo apt-get dist-upgrade
 ```
 
--Restart Ubutnu:
+-Restart Ubuntu:
 ```
 $ sudo reboot
 ```
@@ -587,7 +587,7 @@ $ sudo tail -30 /var/log/apache2/error.log
 
 3) [http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied](http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied) <sup>21</sup>
 
-#### Install Extras:
+#### Install extras:
 
 -Let's install the monitor application, Glances <sup>16</sup> <sup>22</sup>. Log in (ssh) to your virtual server if you haven't already.
 
