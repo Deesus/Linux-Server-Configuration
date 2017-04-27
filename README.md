@@ -1,48 +1,33 @@
 # Linux/Unix Server Configuration
-A baseline installation of a Linux (Ubuntu) distribution on a virtual machine. This project sets up and deploys a web app, secures it from attack vectors, installs updates, and configures databases.
-
-This README proffers a step-by-step walkthrough of Udacity's Linux Configuration project as well as resources and tips.
+A baseline installation of a Linux (Ubuntu) distribution on a virtual machine. This project sets up and deploys a web app, secures it from attack vectors, installs updates, and configures databases. Some resources and tips are provided as well.
 
 
-## 1. App Info and Accessibility
-
-*Public IP Address:* 54.186.19.143 
-
-*SSH Port:* 2200
-
-You can log into the virtual server (on Amazon's cloud) using this shell command:
-```
-$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa root@54.186.19.143
-```
-
-The deployed web app -- a image sharing app -- can be accessed from the following url:
-[http://54.186.19.143](http://54.186.19.143)
+## 1. Dependencies
+- [Git Bash](http://www.git-scm.com/downloads)<sup>1</sup> (for Win users only)
+- Vagrant
 
 
 ## 2. Walkthrough
 
-#### Getting started with your development environment <sup>1</sup>:
--Download [Git Bash](http://www.git-scm.com/downloads) (necessary for Windows users)
-
--Create a development environment and write down the unique public ip address that was generated for future reference:
-[https://www.udacity.com/account#!/development_environment](https://www.udacity.com/account#!/development_environment)
+#### Getting started with your development environment:
+-Create a development environment and write down the unique public ip address that was generated for future reference.
 
 -Download the private key(s)
 
--Open Git Bash and copy and paste the following into the terminal:
+-Open Bash and copy and paste the following into the terminal:
 ```
-$ mv <CURRENT_DIRECTORY>/udacity_key.rsa ~/.ssh/
+$ mv <CURRENT_DIRECTORY>/my_key.rsa ~/.ssh/
 ```
 where <CURRENT_DIRECTORY> is the directory where you downloaded the private key. 
 
 -Enter:
 ```
-$ chmod 600 ~/.ssh/udacity_key.rsa
+$ chmod 600 ~/.ssh/my_key.rsa
 ```
 
 -Finally, we can log into our virtual sever by:
 ```
-$ ssh -i ~/.ssh/udacity_key.rsa root@<PUBLIC_IP>
+$ ssh -i ~/.ssh/my_key.rsa root@<PUBLIC_IP>
 ```
 where <PUBLIC_IP> is the ip address that was generated when you created a new development environment.
 
@@ -137,7 +122,7 @@ $ sudo service ssh restart
 
 *NOTE:* From now on, we cannot ssh into our virtual server using our previous command. From now on, we must specify the port [2200] we want to connect to:
 ```
-$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa root@<PUBLIC_IP>
+$ ssh -p 2200 -i ~/.ssh/my_key.rsa root@<PUBLIC_IP>
 ```
 where <PUBLIC_IP> is the public ip address we have been using.
 
@@ -663,7 +648,7 @@ where <directory_name> is the name of the directory.
 
 ## 4. References:
 
-1: https://www.udacity.com/account#!/development_environment
+1: http://www.git-scm.com/downloads
 
 2: http://askubuntu.com/questions/59458/error-message-when-i-run-sudo-unable-to-resolve-host-none
 
